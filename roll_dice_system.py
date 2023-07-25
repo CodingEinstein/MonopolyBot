@@ -12,54 +12,42 @@ point.load()
 
 def gen_dice(num, image_obj, savename):
     if num == 1:
-        new_image = image_obj
-        new_image.paste(point, (500, 1000), mask=point)
-        image_obj.putdata(new_image, 1, 0)
+        image_obj.paste(point, (500, 1000), mask=point)
         image_obj.save(savename)
         return image_obj
     if num == 2:
-        new_image = image_obj
-        new_image.paste(point, (650, 1150), mask=point)
-        new_image.paste(point, (350, 850), mask=point)
-        image_obj.putdata(new_image, 1, 0)
+        image_obj.paste(point, (650, 1150), mask=point)
+        image_obj.paste(point, (350, 850), mask=point)
         image_obj.save(savename)
         return image_obj
     if num == 3:
-        new_image = image_obj
-        new_image.paste(point, (650, 1150), mask=point)
-        new_image.paste(point, (350, 850), mask=point)
-        new_image.paste(point, (500, 1000), mask=point)
-        image_obj.putdata(new_image, 1, 0)
+        image_obj.paste(point, (650, 1150), mask=point)
+        image_obj.paste(point, (350, 850), mask=point)
+        image_obj.paste(point, (500, 1000), mask=point)
         image_obj.save(savename)
         return image_obj
     if num == 4:
-        new_image = image_obj
-        new_image.paste(point, (650, 1150), mask=point)
-        new_image.paste(point, (350, 850), mask=point)
-        new_image.paste(point, (350, 1149), mask=point)
-        new_image.paste(point, (650, 850), mask=point)
-        image_obj.putdata(new_image, 1, 0)
+        image_obj.paste(point, (650, 1150), mask=point)
+        image_obj.paste(point, (350, 850), mask=point)
+        image_obj.paste(point, (350, 1149), mask=point)
+        image_obj.paste(point, (650, 850), mask=point)
         image_obj.save(savename)
         return image_obj
     if num == 5:
-        new_image = image_obj
-        new_image.paste(point, (650, 1150), mask=point)
-        new_image.paste(point, (350, 850), mask=point)
-        new_image.paste(point, (350, 1149), mask=point)
-        new_image.paste(point, (500, 1000), mask=point)
-        new_image.paste(point, (650, 850), mask=point)
-        new_image.save(savename)
-        image_obj.putdata(new_image, 1, 0)
+        image_obj.paste(point, (650, 1150), mask=point)
+        image_obj.paste(point, (350, 850), mask=point)
+        image_obj.paste(point, (350, 1149), mask=point)
+        image_obj.paste(point, (500, 1000), mask=point)
+        image_obj.paste(point, (650, 850), mask=point)
+        image_obj.save(savename)
         return image_obj
     if num == 6:
-        new_image = image_obj
-        new_image.paste(point, (650, 1150), mask=point)
-        new_image.paste(point, (350, 850), mask=point)
-        new_image.paste(point, (350, 1000), mask=point)
-        new_image.paste(point, (650, 1000), mask=point)
-        new_image.paste(point, (350, 1149), mask=point)
-        new_image.paste(point, (650, 850), mask=point)
-        image_obj.putdata(new_image, 1, 0)
+        image_obj.paste(point, (650, 1150), mask=point)
+        image_obj.paste(point, (350, 850), mask=point)
+        image_obj.paste(point, (350, 1000), mask=point)
+        image_obj.paste(point, (650, 1000), mask=point)
+        image_obj.paste(point, (350, 1149), mask=point)
+        image_obj.paste(point, (650, 850), mask=point)
         image_obj.save(savename)
         return image_obj
 
