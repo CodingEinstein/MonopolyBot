@@ -1,3 +1,4 @@
+""""" Import modules """""
 import telebot
 from telebot import types
 import roll_dice_system as DICE
@@ -21,8 +22,9 @@ def give_dice(message: types.Message):
 @bot.callback_query_handler(func=lambda call: True)
 def bot_roll_dice(call):
     if call.data == "1":
-        bot.send_photo(call.message.chat.id, DICE.call(0, 0, "dice1.jpg", "dice2.jpg"))
+        bot.send_photo(call.message.chat.id, DICE.call())
         bot.send_message(call.message.chat.id, "You rolled dice!")
 
 
+# None stop active
 bot.polling(none_stop=True)
