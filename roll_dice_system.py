@@ -1,7 +1,5 @@
 from PIL import Image
 import random
-n1 = int()
-n2 = int()
 img = Image.open("DICE_EMPTY.jpg")
 img.load()
 img2 = Image.open("DICE_EMPTY.jpg")
@@ -64,7 +62,6 @@ def call(number1, number2, savename1, savename2):
     print(number1, number2)
     dice1 = gen_dice(number1, img, savename1)
     dice2 = gen_dice(number2, img2, savename2)
-    # print(number1, number2)
     result = Image.new('RGB', (2160, 1440))
     result.load()
     dice1.load()
@@ -72,7 +69,6 @@ def call(number1, number2, savename1, savename2):
     result.paste(dice1, (0, 0))
     result.paste(dice2, (1080, 0))
     result.save("dice_result.jpg")
-    result.show()
     move_points = number1 + number2
     print("You got", move_points, "points!")
     return result
