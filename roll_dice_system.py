@@ -17,20 +17,20 @@ def gen_dice(num, image_obj, savename):
         image_obj.save(savename)
         return image_obj
     if num == 2:
-        Image.open("DICE_EMPTY.jpg")
+        image_obj = Image.open("DICE_EMPTY.jpg")
         image_obj.paste(point, (650, 1150), mask=point)
         image_obj.paste(point, (350, 850), mask=point)
         image_obj.save(savename)
         return image_obj
     if num == 3:
-        Image.open("DICE_EMPTY.jpg")
+        image_obj = Image.open("DICE_EMPTY.jpg")
         image_obj.paste(point, (650, 1150), mask=point)
         image_obj.paste(point, (350, 850), mask=point)
         image_obj.paste(point, (500, 1000), mask=point)
         image_obj.save(savename)
         return image_obj
     if num == 4:
-        Image.open("DICE_EMPTY.jpg")
+        image_obj = Image.open("DICE_EMPTY.jpg")
         image_obj.paste(point, (650, 1150), mask=point)
         image_obj.paste(point, (350, 850), mask=point)
         image_obj.paste(point, (350, 1149), mask=point)
@@ -38,7 +38,7 @@ def gen_dice(num, image_obj, savename):
         image_obj.save(savename)
         return image_obj
     if num == 5:
-        Image.open("DICE_EMPTY.jpg")
+        image_obj = Image.open("DICE_EMPTY.jpg")
         image_obj.paste(point, (650, 1150), mask=point)
         image_obj.paste(point, (350, 850), mask=point)
         image_obj.paste(point, (350, 1149), mask=point)
@@ -47,7 +47,7 @@ def gen_dice(num, image_obj, savename):
         image_obj.save(savename)
         return image_obj
     if num == 6:
-        Image.open("DICE_EMPTY.jpg")
+        image_obj = Image.open("DICE_EMPTY.jpg")
         image_obj.paste(point, (650, 1150), mask=point)
         image_obj.paste(point, (350, 850), mask=point)
         image_obj.paste(point, (350, 1000), mask=point)
