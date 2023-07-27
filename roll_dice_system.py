@@ -1,5 +1,4 @@
 """"" Import modules """""
-import random
 from PIL import Image
 
 img = Image.open("DICE_EMPTY.jpg")
@@ -58,10 +57,12 @@ def gen_dice(num, save_slot_name):
         return image_obj
 
 
-def call():
-    number1 = int(random.uniform(1, 7))
-    number2 = int(random.uniform(1, 7))
-    print(number1, number2)
+def numbers(number1, number2):
+    move_points = number1 + number2
+    return move_points
+
+
+def merge(number1, number2, ):
     dice1 = gen_dice(number1, "dice1.jpg")
     dice2 = gen_dice(number2, "dice2.jpg")
     result = Image.new('RGB', (2160, 1440))
@@ -71,6 +72,15 @@ def call():
     result.paste(dice1, (0, 0))
     result.paste(dice2, (1080, 0))
     result.save("dice_result.jpg")
-    move_points = number1 + number2
-    print("You got", move_points, "points!")
     return result
+
+
+def call_merge(number1, number2):
+    points_to_move = numbers(number1, number2)
+    result = merge(number1, number2)
+    return result
+
+
+def call_num(number1, number2):
+    points_to_move = numbers(number1, number2)
+    return points_to_move
