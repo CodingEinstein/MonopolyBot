@@ -1,7 +1,8 @@
 class User:
     pass
 
-    def __init__(self, nickname, money, purchased_places, houses, hotels, places, current_place_index, user_index, dice_number1, dice_number2):
+    def __init__(self, nickname, money, purchased_places, houses, hotels, places, current_place_index, user_index,
+                 dice_number1, dice_number2):
         self.nickname = nickname
         self.money = money
         self.purchased_places = purchased_places
