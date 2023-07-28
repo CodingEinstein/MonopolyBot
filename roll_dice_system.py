@@ -62,15 +62,13 @@ def numbers(number1, number2):
     return move_points
 
 
-def merge(number1, number2, ):
+def merge(number1, number2):
     dice1 = gen_dice(number1, "dice1.jpg")
     dice2 = gen_dice(number2, "dice2.jpg")
     result = Image.new('RGB', (2160, 1440))
     result.load()
     dice1.load()
-    dice1 = gen_dice(number1, "dice1.jpg")
     dice2.load()
-    dice2 = gen_dice(number2, "dice2.jpg")
     result.paste(dice1, (0, 0))
     result.paste(dice2, (1080, 0))
     result.save("dice_result.jpg")
@@ -78,7 +76,6 @@ def merge(number1, number2, ):
 
 
 def call_merge(number1, number2):
-    points_to_move = numbers(number1, number2)
     result = merge(number1, number2)
     return result
 

@@ -10,16 +10,10 @@ from PIL import Image
 player_name = None
 
 
-def create_user(new_username, new_index, number1, number2):
-    new_user = char.User(new_username, 1500, 0, 0, 0, 0, 0, new_index, number1, number2)
+def create_user(new_username, new_index, number1, number2, new_image_result):
+    new_user = char.User(new_username, 1500, 0, 0, 0, 0, 0, new_index, number1, number2, new_image_result)
     return new_user
 
-
-
-b2_n1 = int()
-b2_n2 = int()
-b3_n1 = int()
-b3_n2 = int()
 bot = telebot.TeleBot("6066347084:AAGd4EF5XIdluOLxFeXla-erVSziyDig8lo")
 player_current_place = 0
 current_moving_player = 1
@@ -30,32 +24,42 @@ bot_exist_nickname_list = []
 user_setup_scores = {}
 user_list = []
 
-player = create_user("", 1, 0, 0)
+player = create_user("", 1, 0, 0, None)
 player.player_result = Image.new('RGB', (2160, 1440))
+player.image_result = player.player_result
 player.player_points_to_move = int()
 player.n1 = int()
 player.dice_number1 = player.n1
 player.n2 = int()
 player.dice_number2 = player.n2
 player.points_to_move = int()
-bot1 = create_user(random.choice(bot_nickname_list), 2, 0, 0)
+bot1 = create_user(random.choice(bot_nickname_list), 2, 0, 0, None)
 bot1.n1 = int()
 bot1.dice_number1 = bot1.n1
 bot1.n2 = int()
 bot1.dice_number2 = bot1.n2
 bot1.points_to_move = int()
-bot1.bot1_result = Image.new('RGB', (2160, 1440))
-bot2 = create_user(random.choice(bot_nickname_list), 3, b2_n1, b2_n2)
-bot3 = create_user(random.choice(bot_nickname_list), 4, b3_n1, b3_n2)
+bot1.bot1_result = Image
+bot1.image_result = bot1.bot1_result
+bot2 = create_user(random.choice(bot_nickname_list), 3, 0, 0, None)
+bot2.n1 = int()
+bot2.dice_number1 = bot2.n1
+bot2.n2 = int()
+bot2.dice_number2 = bot2.n2
+bot2.points_to_move = int()
+bot2.bot2_result = Image.new('RGB', (2160, 1440))
+bot2.image_result = bot2.bot2_result
+bot3 = create_user(random.choice(bot_nickname_list), 4, 0, 0, None)
+bot3.n1 = int()
+bot3.dice_number1 = bot3.n1
+bot3.n2 = int()
+bot3.dice_number2 = bot3.n2
+bot3.points_to_move = int()
+bot3.bot3_result = Image.new('RGB', (2160, 1440))
+bot3.image_result = bot3.bot3_result
 chat_id = None
 call_chat_id = None
 human_username = None
-b1_result = Image.new('RGB', (2160, 1440))
-b2_result = Image
-b3_result = Image
-
-b2_points_to_move = int()
-b3_points_to_move = int()
 
 
 @bot.message_handler(commands=['start'])
@@ -95,51 +99,41 @@ def setup(call):
     elif call.data == "Roll Dice Setup":
         player.n1 = int(random.uniform(1, 7))
         player.n2 = int(random.uniform(1, 7))
-        player.player_result = DICE.call_merge(player.n1, player.n2)
+        player.image_result = DICE.call_merge(player.n1, player.n2)
         player.points_to_move = player.n1 + player.n2
-        bot.send_photo(call.message.chat.id, player.player_result)
+        bot.send_photo(call.message.chat.id, player.image_result)
         bot.send_message(call.message.chat.id, f"You rolled dice! You got {player.points_to_move} points!")
         user_setup_scores.update({1: player.points_to_move})
         time.sleep(2)
         bot.send_message(call.message.chat.id, f"The player with number {bot1.user_index} is rolling dices!")
         time.sleep(2)
-        bot1.b1_n1 = int(random.uniform(1, 7))
-        bot1.b1_n2 = int(random.uniform(1, 7))
-        bot1.bot1_result = DICE.call_num(bot1.n1, bot1.n2)
+        bot1.n1 = int(random.uniform(1, 7))
+        bot1.n2 = int(random.uniform(1, 7))
+        bot1.bot1_result = DICE.merge(bot1.n1, bot1.n2)
         bot1.points_to_move = bot1.n1 + bot1.n2
         bot.send_photo(call.message.chat.id, bot1.bot1_result)
         bot.send_message(call.message.chat.id, f"{bot1.nickname} rolled dice! He got {bot1.points_to_move} points!")
         user_setup_scores.update({2: bot1.points_to_move})
         time.sleep(2)
-        global bot2
         bot.send_message(call.message.chat.id, f"The player with number {bot2.user_index} is rolling dices!")
         time.sleep(2)
-        global b2_n1
-        b2_n1 = int(random.uniform(1, 7))
-        global b2_n2
-        b2_n2 = int(random.uniform(1, 7))
-        global b2_points_to_move
-        b2_points_to_move = b2_n1 + b2_n2
-        global b2_result
-        b2_result = DICE.call_merge(b2_n1, b2_n2)
-        bot.send_photo(call.message.chat.id, b2_result)
-        bot.send_message(call.message.chat.id, f"{bot2.nickname} rolled dice! He got {b2_points_to_move} points!")
-        user_setup_scores.update({3: b2_points_to_move})
+        bot2.n1 = int(random.uniform(1, 7))
+        bot2.n2 = int(random.uniform(1, 7))
+        bot2.points_to_move = bot2.n1 + bot2.n2
+        bot2.b2_result = DICE.call_merge(bot2.n1, bot2.n2)
+        bot.send_photo(call.message.chat.id, bot2.b2_result)
+        bot.send_message(call.message.chat.id, f"{bot2.nickname} rolled dice! He got {bot2.points_to_move} points!")
+        user_setup_scores.update({3: bot3.points_to_move})
         time.sleep(2)
-        global bot3
         bot.send_message(call.message.chat.id, f"The player with number {bot3.user_index} is rolling dices!")
         time.sleep(2)
-        global b3_n1
-        b3_n1 = int(random.uniform(1, 7))
-        global b3_n2
-        b3_n2 = int(random.uniform(1, 7))
-        global b3_points_to_move
-        b3_points_to_move = b3_n1 + b3_n2
-        global b3_result
-        b3_result = DICE.call_merge(b3_n1, b3_n2)
-        bot.send_photo(call.message.chat.id, b3_result)
-        bot.send_message(call.message.chat.id, f"{bot3.nickname} rolled dice! He got {b3_points_to_move} points!")
-        user_setup_scores.update({4: b3_points_to_move})
+        bot3.n1 = int(random.uniform(1, 7))
+        bot3.n2 = int(random.uniform(1, 7))
+        bot3.points_to_move = bot3.n1 + bot3.n2
+        bot3.b3_result = DICE.call_merge(bot3.n1, bot3.n2)
+        bot.send_photo(call.message.chat.id, bot3.b3_result)
+        bot.send_message(call.message.chat.id, f"{bot3.nickname} rolled dice! He got {bot3.points_to_move} points!")
+        user_setup_scores.update({4: bot3.points_to_move})
         final_dict = dict(max(user_setup_scores.items()))
         final_dict.update(dict(min(user_setup_scores.items())))
         bot.send_message(call.message.chat.id, final_dict)
