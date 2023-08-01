@@ -15,3 +15,6 @@ class User:
         self.dice_number2 = dice_number2
         self.image_result = image_result
         self.points_to_move = points_to_move
+
+
+
