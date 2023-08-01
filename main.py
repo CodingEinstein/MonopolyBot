@@ -35,6 +35,7 @@ player.n2 = int()
 player.dice_number2 = player.n2
 player.points_to_move = int()
 bot1 = create_user(random.choice(bot_nickname_list), 2, 0, 0, None)
+bot_last_name = bot1.nickname
 bot1.n1 = int()
 bot1.dice_number1 = bot1.n1
 bot1.n2 = int()
@@ -42,7 +43,11 @@ bot1.dice_number2 = bot1.n2
 bot1.points_to_move = int()
 bot1.bot1_result = Image
 bot1.image_result = bot1.bot1_result
-bot2 = create_user(random.choice(bot_nickname_list), 3, 0, 0, None)
+bot2 = create_user(bot_last_name, 3, 0, 0, None)
+while bot2.nickname == bot_last_name:
+    bot2.nickname = str(random.choice(bot_nickname_list))
+    if bot2.nickname != bot_last_name:
+        break
 bot2.n1 = int()
 bot2.dice_number1 = bot2.n1
 bot2.n2 = int()
@@ -50,7 +55,11 @@ bot2.dice_number2 = bot2.n2
 bot2.points_to_move = int()
 bot2.bot2_result = Image.new('RGB', (2160, 1440))
 bot2.image_result = bot2.bot2_result
-bot3 = create_user(random.choice(bot_nickname_list), 4, 0, 0, None)
+bot3 = create_user(bot_last_name, 4, 0, 0, None)
+while bot3.nickname == bot_last_name:
+    bot3.nickname = str(random.choice(bot_nickname_list))
+    if bot3.nickname != bot_last_name:
+        break
 bot3.n1 = int()
 bot3.dice_number1 = bot3.n1
 bot3.n2 = int()
