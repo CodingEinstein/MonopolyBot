@@ -11,9 +11,9 @@ from PIL import Image
 player_name = None
 
 
-def create_user(new_username, new_index, number1, number2, new_image_result, points_to_move):
+def create_user(new_username, new_index, number1, number2, new_image_result, points_to_move, is_bankrupt, in_prison):
     new_user = char.User(new_username, 1500, 0, 0, 0, 0, 0, new_index, number1, number2, new_image_result,
-                         points_to_move)
+                         points_to_move, is_bankrupt, in_prison)
     return new_user
 
 
@@ -27,14 +27,14 @@ bot_exist_nickname_list = []
 user_setup_scores = {}
 user_startup_list = []
 
-player = create_user("", 1, 0, 0, None, int())
+player = create_user("", 1, 0, 0, None, int(), False, False)
 player.player_result = Image.new('RGB', (2160, 1440))
 player.image_result = player.player_result
 player.n1 = int()
 player.dice_number1 = player.n1
 player.n2 = int()
 player.dice_number2 = player.n2
-bot1 = create_user(random.choice(bot_nickname_list), 2, 0, 0, None, int())
+bot1 = create_user(random.choice(bot_nickname_list), 2, 0, 0, None, int(), False, False)
 bot_last_name = bot1.nickname
 bot1.n1 = int()
 bot1.dice_number1 = bot1.n1
@@ -42,7 +42,7 @@ bot1.n2 = int()
 bot1.dice_number2 = bot1.n2
 bot1.bot1_result = Image
 bot1.image_result = bot1.bot1_result
-bot2 = create_user(bot_last_name, 3, 0, 0, None, int())
+bot2 = create_user(bot_last_name, 3, 0, 0, None, int(), False, False)
 while bot2.nickname == bot_last_name:
     bot2.nickname = str(random.choice(bot_nickname_list))
     if bot2.nickname != bot_last_name:
@@ -53,7 +53,7 @@ bot2.n2 = int()
 bot2.dice_number2 = bot2.n2
 bot2.bot2_result = Image.new('RGB', (2160, 1440))
 bot2.image_result = bot2.bot2_result
-bot3 = create_user(bot_last_name, 4, 0, 0, None, int())
+bot3 = create_user(bot_last_name, 4, 0, 0, None, int(), False, False)
 while bot3.nickname == bot_last_name:
     bot3.nickname = str(random.choice(bot_nickname_list))
     if bot3.nickname != bot_last_name:
@@ -67,6 +67,10 @@ bot3.image_result = bot3.bot3_result
 chat_id = None
 call_chat_id = None
 human_username = None
+
+
+def walk_cycle(user):
+    print(user)
 
 
 @bot.message_handler(commands=['start'])
@@ -124,6 +128,7 @@ def setup(call):
             bot.send_photo(call.message.chat.id, image_result)
             bot.send_message(call.message.chat.id, f"{nickname} rolled dice! He got {points_to_move} points!")
             user_setup_scores.update({f"{nickname}": points_to_move})
+
         player.n1 = user_move_num1()
         player.n2 = user_move_num2()
         player.points_to_move = user_move_points(player.n1, player.n2)
@@ -158,6 +163,12 @@ def setup(call):
         print(user_dict)
         bot.send_message(call.message.chat.id, "So, let`s see, who`s  moves first!")
         bot.send_message(call.message.chat.id, f"{user_dict}")
+        markup = types.InlineKeyboardMarkup()
+        Startbtn = types.InlineKeyboardButton(text="Start!", callback_data="START")
+        markup.add(Startbtn)
+        bot.send_message(call.message.chat.id, "Ok, setup is over! Now let`s make a first move!", reply_markup=markup)
+    elif call.data == "START":
+        walk_cycle(player)
 
 
 @bot.message_handler(commands=["give_dice"])

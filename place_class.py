@@ -20,6 +20,7 @@ class SocialPlace:
         self.index = index
 
 
+Move = SocialPlace("Move place", 200, "Take 200 rub", 0)
 Tumen = BuyPlace("Tumen'", 60, "img/TJUMEN.jpg", 1, 0, 0)
 Community_chest = SocialPlace("Community Chest", 0, "Take 'Community Chest Card' card", 2)
 Samara = BuyPlace("Samara", 60, 'img/SAMARA.jpg', 3, 0, 0)
@@ -59,6 +60,3 @@ Chance3 = SocialPlace("Chance", 0, "Take 'Chance' card", 36)
 Moscow = BuyPlace("Moscow", 350, "img/MOSCOW.jpg", 37, 0, 0)
 Uber_tax = SocialPlace("Uber_tax", 100, "Ubder Tax", 38)
 Novosibirsk = BuyPlace("Novosibirsk", 400, "img/NOVOSIBIRSK.jpg", 39, 0, 0)
-
-
-
