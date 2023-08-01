@@ -122,7 +122,7 @@ def setup(call):
 
         def user_move_send(image_result, points_to_move, nickname):
             bot.send_photo(call.message.chat.id, image_result)
-            bot.send_message(call.message.chat.id, f"You rolled dice! You got {points_to_move} points!")
+            bot.send_message(call.message.chat.id, f"{nickname} rolled dice! He got {points_to_move} points!")
             user_setup_scores.update({f"{nickname}": points_to_move})
         player.n1 = user_move_num1()
         player.n2 = user_move_num2()
