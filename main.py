@@ -34,6 +34,7 @@ player.n1 = int()
 player.dice_number1 = player.n1
 player.n2 = int()
 player.dice_number2 = player.n2
+player.move_dict = {}
 bot1 = create_user(random.choice(bot_nickname_list), 2, 0, 0, None, int(), False, False)
 bot_last_name = bot1.nickname
 bot1.n1 = int()
@@ -108,56 +109,28 @@ def setup(call):
         bot.send_photo(call.message.chat.id, player.player_result)
         bot.send_message(call.message.chat.id, f"You rolled dice! You got {player.points_to_move} points!")
     elif call.data == "Roll Dice Setup":
-        def user_move_num1():
-            dice_number1 = int(random.uniform(1, 7))
-            return dice_number1
-
-        def user_move_num2():
-            dice_number2 = int(random.uniform(1, 7))
-            return dice_number2
-
-        def user_move_points(number1, number2):
+        def user_move(nickname):
+            number1 = int(random.uniform(1, 7))
+            number2 = int(random.uniform(1, 7))
             points_to_move = number1 + number2
-            return points_to_move
-
-        def user_move_image(number1, number2):
             image_result = DICE.call_merge(number1, number2)
-            return image_result
-
-        def user_move_send(image_result, points_to_move, nickname):
             bot.send_photo(call.message.chat.id, image_result)
             bot.send_message(call.message.chat.id, f"{nickname} rolled dice! He got {points_to_move} points!")
             user_setup_scores.update({f"{nickname}": points_to_move})
-
-        player.n1 = user_move_num1()
-        player.n2 = user_move_num2()
-        player.points_to_move = user_move_points(player.n1, player.n2)
-        player.image_result = user_move_image(player.n1, player.n2)
-        user_move_send(player.image_result, player.points_to_move, player.nickname)
+            return number1, number2, points_to_move, image_result
+        player.move_dict = user_move(player.nickname)
         time.sleep(2)
         bot.send_message(call.message.chat.id, f"The player with number {bot1.user_index} is rolling dices!")
         time.sleep(2)
-        bot1.n1 = user_move_num1()
-        bot1.n2 = user_move_num2()
-        bot1.points_to_move = user_move_points(bot1.n1, bot1.n2)
-        bot1.image_result = user_move_image(bot1.n1, bot1.n2)
-        user_move_send(bot1.image_result, bot1.points_to_move, bot1.nickname)
+        bot1.move_dict = user_move(bot1.nickname)
         time.sleep(2)
         bot.send_message(call.message.chat.id, f"The player with number {bot2.user_index} is rolling dices!")
         time.sleep(2)
-        bot2.n1 = user_move_num1()
-        bot2.n2 = user_move_num2()
-        bot2.points_to_move = user_move_points(bot2.n1, bot2.n2)
-        bot2.image_result = user_move_image(bot2.n1, bot2.n2)
-        user_move_send(bot2.image_result, bot2.points_to_move, bot2.nickname)
+        bot2.move_dict = user_move(bot2.nickname)
         time.sleep(2)
         bot.send_message(call.message.chat.id, f"The player with number {bot3.user_index} is rolling dices!")
         time.sleep(2)
-        bot3.n1 = user_move_num1()
-        bot3.n2 = user_move_num2()
-        bot3.points_to_move = user_move_points(bot3.n1, bot3.n2)
-        bot3.image_result = user_move_image(bot3.n1, bot3.n2)
-        user_move_send(bot3.image_result, bot3.points_to_move, bot3.nickname)
+        bot3.move_dict = user_move(bot3.nickname)
         user_dict = sorted(user_setup_scores.items(), key=operator.itemgetter(1))
         user_dict.reverse()
         print(user_dict)
